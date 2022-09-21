@@ -1,0 +1,384 @@
+﻿
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="ctl00_Head1"><meta http-equiv="Content-Type" content="text/html; charset=UNICODE" /><meta http-equiv="Content-Style-Type" content="text/css" /><meta http-equiv="Content-Script-Type" content="text/javascript" /><link href="../style/title.css" rel="stylesheet" type="text/css" /><link href="../style/tab.css" rel="stylesheet" type="text/css" /><link href="../style/styles.css" rel="stylesheet" type="text/css" /><link href="../style/lang.css" rel="stylesheet" type="text/css" /><link href="/IWLite/style/lang_zh-TW.css" rel="stylesheet" type="text/css" /><link href="../style/report.css" rel="stylesheet" type="text/css" /><link href="../style/print.css" rel="stylesheet" type="text/css" media="print" /><link href="../Image/iwseries.ico" rel="SHORTCUT ICON" />
+	<script type="text/javascript" src="/IWLite/Script/cmnfunc.js"></script>
+	<script type="text/javascript" src="/IWLite/Script/datetime.js"></script>
+	<script type="text/javascript" src="/IWLite/Script/iwwebcontrol.js"></script>
+	<script type="text/javascript" src="/IWLite/Script/ctrlfunc.js"></script>
+    <title>
+	Customer Counting System IWLite
+</title></head>
+<body class="mainbody">
+    <form method="post" action="fp.html" id="aspnetForm">
+<div class="aspNetHidden">
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="" />
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="" />
+<input type="hidden" name="__LASTFOCUS" id="__LASTFOCUS" value="" />
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUKLTM5NTEyMjEyMA9kFgJmDw8WBB4ISGVscFBhdGhlHglIZWxwU3R5bGUFDWRpc3BsYXk6IG5vbmVkFgICAQ9kFgYCBg9kFgQCAw8PFgIeBFRleHQFDOWPsOWMl+W4gueri2RkAgUPDxYCHwIFCeWcluabuOmkqGRkAgcPZBYCZg8PFgIeB1Zpc2libGVoZBYCAgMPDxYCHwIFBuW/q+WgsWRkAggPZBYEAgEPZBYCZg9kFgQCBQ8QZBAVAQzljJfmipXliIbppKgVAQEwFCsDAWdkZAIJDw8WAh4ISW50ZXJ2YWwCPGQWAgICDw8WAh8CBcYCDQo8c2NyaXB0IGxhbmd1YWdlPSJqYXZhc2NyaXB0IiB0eXBlPSJ0ZXh0L2phdmFzY3JpcHQiPg0KLy8gPCFDREFUQVsNCnNldEludGVydmFsKEF1dG9Qb3N0QmFjaywgNjAwMDApOw0KZnVuY3Rpb24gQXV0b1Bvc3RCYWNrKCkgeyANCnZhciBzdGF0ZSA9IGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCdVcGRhdGVTdGF0ZScpOw0KaWYgKHN0YXRlICE9IG51bGwgJiYgc3RhdGUuaW5uZXJIVE1MID09ICdPTicpIHsNCl9fZG9Qb3N0QmFjaygnY3RsMDBfTWFpblBsYWNlX0F1dG9Qb3N0QmFjazFfU2NyaXB0TGFiZWwnLCAnJyk7DQp9DQp9DQoNCi8vIF1dPg0KPC9zY3JpcHQ+DQpkZAIDD2QWAmYPZBYCAgEPZBYWAgEPDxYCHwIFKOmAseS4iSwg5Y2B5LiA5pyILiAyMCwgMjAxOSAxMjoxNyDkuIvljYhkZAIDDw8WAh8CBQzljJfmipXliIbppKhkZAIFDw8WBh8CBQw1OjAwIC0gMjM6MDAeCUZvcmVDb2xvcgweBF8hU0ICBGRkAgYPDxYCHwIFAzUxNmRkAgcPDxYCHwIFAzM5MWRkAggPDxYCHwIFAzEyNWRkAgkPDxYCHwIFAzEzM2RkAgoPDxYCHwIFBTEwOjU1ZGQCCw8PFgIfAgUCNDZkZAIMDw8WAh8CBQYzOW1pbi5kZAIODxBkEBUBAjFGFQEBMRQrAwFnZGRk5y+gSo2zAWcpY/6m+OFOZE7pFCTMyvs9nQQW1YdCH68=" />
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['aspnetForm'];
+if (!theForm) {
+    theForm = document.aspnetForm;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
+
+
+<script src="/IWLite/WebResource.axd?d=ikNqyqk3GaRMjeDP5HO2OsOT5GUXgWn8iHzT1UXPZz0r-Nb7IdGclBAhw3SIKeNfgR57EYfOXBSGDrcwpGupp_eB8KQJPsVLwmxZ3S_BJTM1&amp;t=635328605200000000" type="text/javascript"></script>
+
+
+<script src="/IWLite/ScriptResource.axd?d=NwytsH0nmSmO2aph7sxlv0mJVNlcMP_dH4RozvXPyUxdNUhJDY2dRBNub0-Rekp_BQdyL2AsmdskGjoNhSKrvXEiTCmG0HCfRN4S1pGqIJfLKx4rvw-6FRxNCWIlZ-XbYSpxF7Z8Ic5I9vUXkimG9OFzhmnkQ-N-lppz0LdHuEc1&amp;t=42a7acab" type="text/javascript"></script>
+<script src="/IWLite/ScriptResource.axd?d=tIMm9muPlggXQBOSX27MpfTFrjhGXJvy-vRC65nYa3z-WuWyy0ylmYLCzj86Ddk5pS1_nt1DRVyG5-EvyjnKPJnrMgjEcAa0V8ZotCUpEIbNYxpkuJZz01621EFaqxjTxj2VSn6sIstp4j9qs4JczwmAMfGeZvdfsk_qLA5RznNz1zoBzpXA-tIaun1-InuM0&amp;t=42a7acab" type="text/javascript"></script>
+<div class="aspNetHidden">
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="5A9536A3" />
+	<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="/wEdAAlMvbqmjBzohsfJLyfNv1iSkF9DtUjVYY5+e2MGmM8bTab4/3Azf67epPU9mkeEAyxsLBivz77hIai/hDsyNCLywUeGdDMqianE74wUmKU2ryLqOiW3MOK8Tl8XPxVHqEdJ4AMrstUJMeZUcQKCupxr4jz6IXeV8Yj5Cay2omcnconi9tiuU9sMhc/kebZMUgEWiWWLpwPn2AuE0scyYw4gWakJ60bFoRNYF67yjRbYLA==" />
+</div>
+		<script type="text/javascript">
+//<![CDATA[
+//Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', 'aspnetForm', ['tctl00$MainPlace$UpdatePanel1','','tctl00$MainPlace$UpdatePanel2',''], [], [], 120, 'ctl00');
+//]]>
+</script>
+
+		
+
+<!-- ローディング中のイメージ -->
+<div id="ctl00_ImpossibleInput1_UpdateProgress1" style="display:none;">
+	
+		
+		<div class="impossibleInput">
+			<img id="ctl00_ImpossibleInput1_Image2" src="../Image/Loading/nowloading.gif" style="position: relative; top :50%;" />
+			<br />
+			<img id="ctl00_ImpossibleInput1_Image3" src="../Image/Loading/bar2.gif" style="position: relative; top :50%;" />
+		</div>
+	
+</div>
+<!-- 入力不可用Div -->
+<div id="ImpossibleInput" style="display: none; text-align: center;">
+	
+	<div class="impossibleInput"></div>
+</div>
+		<input id="Reload" type="hidden" value="" /> <!-- 再描画フラグ -->
+		<input id="ApplicationPath" type="hidden" value="/IWLite" />
+		<!-- ヘッダー -->
+		<div class="header">
+			<span style="position: relative; top: 5px; left:5px;" class="no_print">
+				<span>user </span>
+				<span style="display: none"> | <a href="javascript:OpenHelp('')">Help</a></span>
+				<span style="display: none"> | <a id="ctl00_LogoutButton" href="javascript:__doPostBack(&#39;ctl00$LogoutButton&#39;,&#39;&#39;)">Logout</a></span>
+			</span>
+			<input id="dummy" type="submit" value="" onclick="return false;" style="width: 0px; height: 0px; border-width: 0px;" />
+		</div>
+		<!-- タイマー -->
+		<div id="TimerLabel" class="no_print timer">0000/00/00/ 00:00:00</div>
+		<!-- タイトル -->
+		<div class="title">
+			<div style="float: left; padding-left: 3px;">
+				<div class="series">Information Web Service Series</div>
+				<div class="subtitle">Customer Counting System</div>
+			</div>
+			<img src="../Image/Title/IWLite.gif" style="margin-left: 5px; margin-bottom: 5px;" />
+			<br />
+			<!-- 店舗コード＆店舗名 -->
+			<span id="ctl00_StoreNameSpace" class="StoreNameSpace" style="margin-left: 5px">
+				<span class="StoreCode">
+								
+					<span id="ctl00_StoreCodeLabel">台北市立</span>
+				</span>
+				<span class="StoreName">
+					<span id="ctl00_StoreNameLabel">圖書館</span>
+				</span>
+			</span>
+		</div>
+        <span><link href="/IWLite/style/lang_zh-TW.css" rel="stylesheet" type="text/css" /></span>
+		<!-- タブ -->
+		<div style="width: 100%; margin-bottom: 5px">
+			
+
+<div class="no_print">
+	<!-- タブ -->
+	<div class='tabs'><div id='tab_1' class='tab tab_passive' onmouseover="showTabMenu(1);" onmouseout="hideTabMenu(1);" onclick="location.href='http://192.168.181.151/IWLite/SiteMap.aspx';">選單</div>
+<div id='tab_2' class='tab tab_active'>報告</div>
+<div id='tab_3' class='tab tab_passive' onmouseover="showTabMenu(3);" onmouseout="hideTabMenu(3);" onclick="location.href='http://192.168.181.151/IWLite/Setting/IWLite.aspx';">設定</div>
+<div style="clear:both"></div></div>
+	<!--タブポップアップメニュー -->
+	<div class="tab_mens"><div id='tabmenu_1' class='tab_menu' style='display: none; position: absolute;'></div>
+<div id='tabmenu_3' class='tab_menu' style='display: none; position: absolute;'><div class='tab_menu_passive' onclick="location.href='http://192.168.181.151/IWLite/Setting/IWLite.aspx'" onmouseover="showTabMenu(3); setCss(this, 'tab_menu_active');" onmouseout="hideTabMenu(3); setCss(this, 'tab_menu_passive');">
+<img style="position: relative; bottom: 3px;" alt='' src='/IWLite/Image/tab/marrow.gif' />基本設定</div>
+<div class='tab_menu_passive' onclick="location.href='http://192.168.181.151/IWLite/Setting/Output.aspx'" onmouseover="showTabMenu(3); setCss(this, 'tab_menu_active');" onmouseout="hideTabMenu(3); setCss(this, 'tab_menu_passive');">
+<img style="position: relative; bottom: 3px;" alt='' src='/IWLite/Image/tab/marrow.gif' />輸出設定</div>
+<div class='tab_menu_passive' onclick="location.href='http://192.168.181.151/IWLite/Setting/User.aspx'" onmouseover="showTabMenu(3); setCss(this, 'tab_menu_active');" onmouseout="hideTabMenu(3); setCss(this, 'tab_menu_passive');">
+<img style="position: relative; bottom: 3px;" alt='' src='/IWLite/Image/tab/marrow.gif' />用戶設定</div>
+</div>
+</div>
+	<!--選択中タブのメニュー-->
+	<div class='selectedtab_menus'><div class='selectedtab_menu'>快報</div>
+<div class='selectedtab_menu'><a href='http://192.168.181.151/IWLite/Report/Daily.aspx'>日報</a></div>
+<div class='selectedtab_menu'><a href='http://192.168.181.151/IWLite/Report/Period.aspx'>期間報</a></div>
+<div class='selectedtab_menu'><a href='http://192.168.181.151/IWLite/Report/Spot.aspx'>各入口分開報告</a></div>
+<div class='selectedtab_menu'><a href='http://192.168.181.151/IWLite/Report/ProsStatus.aspx'>狀態</a></div>
+<div style="clear:both"></div>
+</div>
+	<!--タブメニュー内のリンクの一覧の表示-->
+	<div class='selectedtab_menulinks'></div>
+</div>
+<!--ページ名称の表示-->
+
+
+		</div>
+		<!-- ブラウザエラー -->
+		<div id="browserErr" style="display:none;color:red;margin-bottom:8px">
+			<div style="margin-top:10px;font-size:20pt">This software is not compatible with this browser.
+				<span style="font-size:12pt"><a target="_blank" href="http://192.168.181.151/IWLite/Help/Compatibility.mht" style="text-decoration:underline">Click here for solutions.</a></span>
+			</div>
+		</div>
+        <!-- ページの内容 -->
+        <div style="padding: 0px 3px 3px 3px">
+			<!--スペース1-->
+			<div>
+				
+    <div id="ctl00_MainPlace_UpdatePanel1">
+	
+		    <div class="no_print">
+		        <div class="groupfield">
+			        <div class="grouptitle">
+				        Report Selection
+			        </div>
+			        <table>
+				        <tr>
+					        <td style="text-align: right">
+						        Select Block
+					        </td>
+					        <td>:</td>
+					        <td>
+						        <select name="ctl00$MainPlace$BlockList" onchange="javascript:setTimeout(&#39;__doPostBack(\&#39;ctl00$MainPlace$BlockList\&#39;,\&#39;\&#39;)&#39;, 0)" id="ctl00_MainPlace_BlockList">
+		<option selected="selected" value="0">北投分館</option>
+
+	</select>
+						        <input type="hidden" name="ctl00$MainPlace$SelectedBlockID" id="ctl00_MainPlace_SelectedBlockID" value="0" />
+					        </td>
+				        </tr>
+				        <tr>
+							<td style="font-size: 11pt; margin-left: 12px" colspan="3">
+								
+
+<table>
+	<tr>
+		<td><span id="ctl00_MainPlace_AutoPostBack1_TextLabel">Auto-update</span></td>
+		<td><span id="UpdateState" style="margin-left:5px">ON</span></td>
+		<td>
+			<img id="autoUpdateImgOff" alt="" src="/IWLite/Image/lightoff.gif" />
+			<img id="autoUpdateImgOn" alt="" src="/IWLite/Image/lighton.gif" style='display:none' />
+		</td>
+		<td>
+			<input type="submit" name="ctl00$MainPlace$AutoPostBack1$StartButton" value="OFF" id="ctl00_MainPlace_AutoPostBack1_StartButton" style="margin-left: 5px; width: 50px; font-size: 9pt" />
+		</td>
+	</tr>
+</table>
+<span id="ctl00_MainPlace_AutoPostBack1_ScriptLabel">
+<script language="javascript" type="text/javascript">
+// <!CDATA[
+setInterval(AutoPostBack, 60000);
+function AutoPostBack() { 
+var state = document.getElementById('UpdateState');
+if (state != null && state.innerHTML == 'ON') {
+__doPostBack('ctl00_MainPlace_AutoPostBack1_ScriptLabel', '');
+}
+}
+
+// ]]>
+</script>
+</span>
+
+<script language="javascript" type="text/javascript">
+// <!CDATA[
+	//---------------------------------------
+	// 自動更新中イメージを点滅させる
+	//---------------------------------------
+	function blinkAutoUpdateImage() {
+		var onimage = document.getElementById('autoUpdateImgOn');
+		var offimage = document.getElementById('autoUpdateImgOff');
+		var state = document.getElementById('UpdateState');
+		if (state == null || state.innerHTML == 'OFF') {
+			onimage.style.display = 'none';
+			offimage.style.display = 'inline';
+			return;
+		}
+		if (onimage.style.display != 'none') {
+			onimage.style.display = 'none';
+			offimage.style.display = 'inline';
+		}
+		else {
+			onimage.style.display = 'inline';
+			offimage.style.display = 'none';
+		}
+	}
+	setInterval(blinkAutoUpdateImage, 500)
+// ]]>
+</script>
+		
+							</td>
+				        </tr>
+			        </table>
+		        </div>
+		    </div>
+	    
+</div>
+    <div id="ctl00_MainPlace_UpdatePanel2">
+	
+		    <div id="ctl00_MainPlace_ReportDiv">
+			    <div style="margin-top: 5px; font-size: 16pt;">
+				    <div style="border-bottom: 2px ridge ivory; width: 400px">
+					    [Date Time]
+				    </div>
+				    <span id="ctl00_MainPlace_DateTimeLabel">週三, 十一月. 20, 2019 12:17 下午</span>
+			    </div>
+                <table style="margin-top: 5px; font-size: 12pt">
+	                <tr>
+		                <td style="text-align: right">
+						    Block Name
+		                </td>
+		                <td>:</td>
+		                <td><span id="ctl00_MainPlace_BlockNameLabel">北投分館</span></td>
+	                </tr>
+	                <tr>
+		                 <td style="text-align: right">
+						    Business Hours
+		                </td>
+		                <td>:</td>
+		                <td><span id="ctl00_MainPlace_StoreHoursLabel">5:00 - 23:00</span></td>
+	                </tr>
+                </table>
+		        <table cellspacing="0" cellpadding="5" border="0" style="border-collapse:collapse; float:left;">
+			        <tr>
+				        <td class="TotalTableSubject">入館累計</td>
+				         <td class="TotalTableValue">
+					        <span id="ctl00_MainPlace_InCountLabel">516</span>
+				        </td>
+			        </tr>
+			        <tr>
+				         <td class="TotalTableSubject">離館累計</td>
+				         <td class="TotalTableValue">
+					        <span id="ctl00_MainPlace_OutCountLabel">391</span>
+				        </td>
+			        </tr>
+			        <tr>
+				         <td class="TotalTableSubject">現場人數</td>
+				         <td class="TotalTableValue">
+					        <span id="ctl00_MainPlace_StayCountLabel">125</span>
+				        </td>
+			        </tr>
+			        <tr>
+				         <td class="TotalTableSubject">最多現場人數</td>
+				         <td class="TotalTableValue">
+					        <span id="ctl00_MainPlace_StayCountMaxLabel">133</span>
+				        </td>
+			        </tr>
+			        <tr>
+				         <td class="TotalTableSubject">最長停留時間</td>
+				         <td class="TotalTableValue">
+					        <span id="ctl00_MainPlace_StayTimeMaxLabel">10:55</span>
+				        </td>
+			        </tr>
+			        <tr>
+				         <td class="TotalTableSubject">平均現場人數</td>
+				         <td class="TotalTableValue">
+					        <span id="ctl00_MainPlace_StayCountAverageLabel">46</span>
+				        </td>
+			        </tr>
+			        <tr>
+				         <td class="TotalTableSubject">平均停留時間</td>
+				         <td class="TotalTableValue">
+					        <span id="ctl00_MainPlace_StayTimeAverageLabel">39min.</span>
+				        </td>
+			        </tr>
+		        </table>
+		        <div style="float: left; padding: 0px 10px 10px 10px">
+			        <iframe src="../Page/QuickImage.aspx?SpotID=1&Interval=1" frameborder="0" height="260px" width="320px" scrolling="no"></iframe>
+		        </div>
+	            <table >
+		            <tr>
+			            <td style="text-align: right">
+						    Select Gate/Area
+			            </td>
+			            <td>:</td>
+			            <td>
+				            <select name="ctl00$MainPlace$SpotList" onchange="javascript:setTimeout(&#39;__doPostBack(\&#39;ctl00$MainPlace$SpotList\&#39;,\&#39;\&#39;)&#39;, 0)" id="ctl00_MainPlace_SpotList">
+		<option selected="selected" value="1">1F</option>
+
+	</select>
+						    <input type="hidden" name="ctl00$MainPlace$SelectedSpotID" id="ctl00_MainPlace_SelectedSpotID" />
+			            </td>
+		            </tr>
+	            </table>
+		    </div>
+		    <div style="clear: both">
+				<br />
+				
+<script language="javascript" type="text/javascript">
+// <!CDATA[
+//Sys.Application.add_load(function() {
+//setScrollPosition('ctl00_MainPlace_ReportTable1');
+//});
+// ]]>
+</script>
+<div id="ctl00_MainPlace_ReportTable1" onScroll="onScroll(&#39;ctl00_MainPlace_ReportTable1&#39;)" style="width:980px;display:;">
+		<table class="width_ctl00_MainPlace_ReportTable1" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+			<tr>
+				<td class="ReportSubject ReportHeader ReportLeft" style="white-space:nowrap;">入口號碼No.</td><td class="ReportSubject ReportHeader" style="white-space:nowrap;">入口名稱</td><td class="ReportValue ReportHeader" style="white-space:nowrap;">入館累計</td><td class="ReportValue ReportHeader" style="white-space:nowrap;">入館構成比</td><td class="ReportValue ReportHeader" style="white-space:nowrap;">離館累計</td><td class="ReportValue ReportHeader ReportRight" style="white-space:nowrap;">離館構成比</td>
+			</tr><tr onmouseover="this.className=&#39;ReportMouseOver&#39;;" onmouseout="this.className=&#39;&#39;;">
+				<td class=" ReportSubject ReportLeft ReportBottom" style="white-space:nowrap;">1</td><td class=" ReportSubject ReportBottom" style="white-space:nowrap;">1F</td><td class=" ReportValue ReportBottom" style="white-space:nowrap;">516</td><td class=" ReportValue ReportBottom" style="white-space:nowrap;">100.0%</td><td class=" ReportValue ReportBottom" style="white-space:nowrap;">391</td><td class=" ReportValue ReportRight ReportBottom" style="white-space:nowrap;">100.0%</td>
+			</tr>
+		</table><input type="hidden" name="ctl00_MainPlace_ReportTable1_Position" id="ctl00_MainPlace_ReportTable1_Position" value="0,0" />
+	</div><style type="text/css">
+@media screen {.width_ctl00_MainPlace_ReportTable1 { width: ; } }
+@media print {.width_ctl00_MainPlace_ReportTable1 { width: ; } }
+tr.Mouseover_ctl00_MainPlace_ReportTable1 { }
+</style>
+
+            </div>
+	    
+</div>
+
+			</div>
+			<div style="clear: both"></div>
+        </div>
+    
+
+<script type="text/javascript">
+//<![CDATA[
+//Sys.Application.add_init(function() {
+//    $create(Sys.UI._UpdateProgress, {"associatedUpdatePanelId":null,"displayAfter":500,"dynamicLayout":true}, null, null, $get("ctl00_ImpossibleInput1_UpdateProgress1"));
+//});
+//]]>
+</script>
+</form>
+</body>
+	<script type="text/javascript" src="/IWLite/Script/cmnproc.js"></script>
+	<script type="text/javascript" src="/IWLite/Script/sysevent.js"></script>
+	<script type="text/javascript">
+	//<![CDATA[
+		//-------------------------------
+		// IE正常表示確認
+		//-------------------------------
+		if (typeof __doPostBack != "function") {
+			var browserErr = document.getElementById("browserErr");
+			setVisible(browserErr, true);
+		}
+	//]]>
+	</script>
+</html>
