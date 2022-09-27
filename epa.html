@@ -1,0 +1,76 @@
+﻿<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="refresh" content="3600"/>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>EPA Open Data</title>
+
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+    //key=e4fd3567-e4f4-4682-81d8-4e3642b0372e
+    var epakey = getUrlVars()["key"];
+    console.log("key=" , epakey);
+    if(isNaN(epakey))
+    {
+        epakey='e4fd3567-e4f4-4682-81d8-4e3642b0372e';
+        console.log('Use default key');
+    }
+    var fields, records;  
+    var header=[];
+    var url3= "https://data.epa.gov.tw/api/v2/aqx_p_432?offset=0&limit=1000&api_key=" + epakey;
+    $.getJSON(url3, function(data){
+        console.log(data);
+
+        var fields = data.fields;
+        console.log(fields);
+        records = data.records;
+        console.log(records);
+
+        var html = [];
+        header=[];
+        for(var i in records)
+        {
+            var air = records[i];
+            //console.log(i,air);
+            if(i == 0)
+            {
+                html.push("<table border=1><tr>");
+                for (const key in air) {
+                    html.push("<td><b>");
+                    html.push(key);
+                    html.push("</td>");
+                    header.push(key);
+                }
+                html.push("</tr>");
+            }
+            html.push("<tr>");
+            for (const key in air) {
+                html.push("<td>");
+                html.push(air[key]);
+                html.push("</td>");
+            }
+            html.push("</tr>");
+        }
+        html.push("</table>")
+        $("#div381").html(html.join('')).css("background-color", "white");
+    });
+
+
+    function getUrlVars() {
+        var vars = {};
+        var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+            vars[key] = value;
+        });
+        return vars;
+    }
+
+</script>
+
+
+	</head>
+	<body>
+		<!-- HTML -->
+    <div id="div381"></div>
+	</body>
+</html>

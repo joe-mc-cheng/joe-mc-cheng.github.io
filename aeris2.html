@@ -1,0 +1,297 @@
+﻿<!DOCTYPE HTML>
+<html>
+	<head>
+		<!--meta http-equiv="refresh" content="5"-->
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title> iAeris </title>
+		<link rel="apple-touch-icon" sizes="57x57" href="aeris-57x57.png" />
+		<link rel="apple-touch-icon" sizes="72x72" href="aeris-72x72.png" />
+		<link rel="apple-touch-icon" sizes="114x114" href="aeris-114x114.png" />
+		<link rel="apple-touch-icon" sizes="144x144" href="aeris-144x144.png" />
+
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+		<style type="text/css">
+			* {  
+			    margin: 0;  
+			    padding: 0 auto;  
+			}
+			img {
+			    max-width: 100%;
+			    max-height: 100%;
+			    display: none;
+			}
+			.portrait {
+			    height: 480px;
+			    width: 800px;
+			    display: none;
+			}		
+		  	@font-face {
+		    	font-family: font02;
+				src: local(HelveticaNeueLTStd-LtCn),url('HelveticaNeueLTStd-LtCn.otf');
+			}
+			canvas {
+    			font-family: font02;
+			}
+		</style>
+
+		<!-- Javascript -->
+		<script type="text/javascript">
+			//var G_BLESNO = getUrlVars()["SNO"];
+			var url3;
+            var G_IP = getUrlVars()["IP"];
+            if(typeof G_IP==='undefined')
+            	url3 = 'http://172.24.20.29/read?callback=?';
+            else
+            	url3 = 'http://' + G_IP + '/read?callback=?';
+			document.title = "iAeris " + G_IP;
+            var G_Timer = getUrlVars()["timer"];
+			console.log(G_Timer);
+            var timer1=4000;
+            
+            if(G_Timer==='undefined' || G_Timer=='undefined')
+            	timer1 = 4000;
+            else
+            	timer1 = parseInt(G_Timer);
+            
+			if(timer1<2000) timer1=2000;
+            if(isNaN(timer1)) timer1 =4000;
+            console.log(timer1);
+			console.log(url3);
+			var O_TVOC = {xx:60, yy:174, USL:0.560};
+			var O_CO2 = {xx:250, yy:174, USL:1000};
+			var O_CO = {xx:470, yy:174, USL:9};
+			var O_HCHO = {xx:590, yy:174, USL:0.08};
+			var O_PM10 = {xx:85, yy:320, USL:75};
+			var O_PM25 = {xx:260, yy:320, USL:35};
+			var O_EPAPM10 = {xx:85, yy:360, USL:75};
+			var O_EPAPM25 = {xx:260, yy:360, USL:35};
+			var O_Temperature = {xx:434, yy:320, USL: 35};
+			var O_RH = {xx:606, yy:320, USL:90};
+			var O_Date = {xx:420, yy:50};
+			var O_Time = {xx:600, yy:50};
+			var O_Place = {xx:20, yy:430};
+			var O_SNO = {xx:650, yy:460};
+			var O_Index = {xx:600, yy:460};
+			
+		$(document).ready(function (){	
+				var x = document.createElement("canvas");
+				x.setAttribute('width',800);
+				x.setAttribute('height',480);
+				x.setAttribute('id','canvas0');
+				var ctx = x.getContext("2d");
+			    ctx.width = 800;
+			    ctx.height =480;
+			    ctx.save();
+			    var image = document.getElementById("pannel");
+			    ctx.drawImage(image, 0, 0,800,480);
+				document.body.appendChild(x);
+		
+				draw();
+				
+		});
+
+	    function getUrlVars() {
+			var vars = {};
+			var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+				vars[key] = value;
+			});
+			return vars;
+		}
+
+		function draw() {
+			
+	        $.getJSON(url3, function(data){ 
+	            var html = [];
+	            var i;
+	            var cnt=0;
+	            var Xscale = 1.0;
+	            var Yscale = 1.0;
+	            var ctx;
+	            var x;
+				console.log(data);
+
+				/*x = document.createElement("canvas");
+				x.setAttribute('width',800);
+				x.setAttribute('height',480);
+				x.setAttribute('id','canvas'+String(i));
+				ctx = x.getContext("2d");
+			    ctx.width = 800;
+			    ctx.height =480;
+			    ctx.save();
+			    var image = document.getElementById("pannel");
+			    ctx.drawImage(image, 0, 0,800,480);*/
+			    x = document.getElementById('canvas0');
+			    ctx = x.getContext("2d");
+			    var image = document.getElementById("pannel");
+			    ctx.drawImage(image, 0, 0,800,480);
+				//TVOC
+				var NGColor = "rgb(158,0,100)";		//Dark Purple
+				var OKColor = "rgb(255,255,255)";	//White
+		    	ctx.font = '36pt font02';
+				ctx.fillStyle=OKColor;  
+				ctx.scale(Xscale,Yscale);
+//				if((data.TVOC/1000)>O_TVOC.USL) ctx.fillStyle=NGColor;  
+				if((data.TVOC)>O_TVOC.USL) ctx.fillStyle=NGColor;  
+//				ctx.fillText(String((data.TVOC/1000).toFixed(3)), O_TVOC.xx/Xscale, O_TVOC.yy/Yscale);
+				ctx.fillText(String((data.TVOC).toFixed(3)), O_TVOC.xx/Xscale, O_TVOC.yy/Yscale);
+				ctx.fillStyle=OKColor;  
+				//CO2
+				var str = String(data.CO2);
+				var len = 4-str.length;
+				if(data.CO2>O_CO2.USL) ctx.fillStyle=NGColor;  
+				ctx.fillText(str, (O_CO2.xx+len*25)/Xscale, O_CO2.yy/Yscale)
+				//CO
+				ctx.fillStyle=OKColor;  
+				if(data.CO>O_CO.USL) ctx.fillStyle=NGColor;  
+				ctx.fillText(String(data.CO), O_CO.xx/Xscale, O_CO.yy/Yscale);
+				//HCHO
+				ctx.fillStyle=OKColor;  
+				if(data.HCHO>O_HCHO.USL) ctx.fillStyle=NGColor;  
+				ctx.fillText(String(data.HCHO.toFixed(3)), O_HCHO.xx/Xscale, O_HCHO.yy/Yscale);
+				//PM10
+				str = String(data.PM10.toFixed(1));
+				len = 4-str.length;
+				ctx.fillStyle=OKColor;  
+				if(data.PM10>O_PM10.USL) ctx.fillStyle=NGColor;  
+				ctx.fillText(str, (O_PM10.xx+len*25)/Xscale, O_PM10.yy/Yscale);
+				ctx.fillStyle=OKColor;
+				//EPAPM10
+//				if((data.EPAPM10!=""))
+				if(typeof(data.EPAPM10) ==='undefined')
+				{
+				}
+				else
+				{
+					if(data.EPAPM10>O_PM10.USL) ctx.fillStyle=NGColor; 
+					str = String(eval(data.EPAPM10).toFixed(1));
+			    	ctx.font = '18pt font02';
+					ctx.fillText(str, (O_PM10.xx+len*25)/Xscale, O_PM10.yy/Yscale+40);						
+			    	ctx.font = '36pt font02';
+					ctx.fillStyle=OKColor;  
+		    	}
+				//PM2.5 || PM2_5 ??
+				var vpm25=0;
+				//var vpm25_1=0;
+				
+				//vpm25 = data["PM2.5"];
+				//vpm25_1 = data.PM2_5;
+						
+	            if(typeof(data["PM2.5"]) ==='undefined' || typeof(data["PM2.5"]) == 'undefined')
+					vpm25 = data.PM2_5;
+				else
+					vpm25 = data["PM2.5"];
+				console.log(vpm25);
+				//console.log(vpm25_1);
+				
+				str = String(vpm25.toFixed(1));
+				len = 4-str.length;
+				ctx.fillStyle=OKColor;  
+				if(vpm25>O_PM25.USL) ctx.fillStyle=NGColor;  
+				ctx.fillText(str, (O_PM25.xx+len*25)/Xscale, O_PM25.yy/Yscale);
+				ctx.fillStyle=OKColor;
+				//EPAPM25
+				var vEPAPM25=0;
+	            if(typeof(data["EPAPM2.5"]) ==='undefined' || typeof(data["EPAPM2.5"]) == 'undefined')
+					vEPAPM25 = data.EPAPM2_5;
+				else
+					vEPAPM25 = data["EPAPM2.5"];
+				
+				//if(data.EPAPM25!="")
+/*				if(typeof(data.EPAPM2.5)==='undefined')
+				{
+				}
+				else*/
+				{
+					if(vEPAPM25>O_PM25.USL) ctx.fillStyle=NGColor; 
+					str = String(vEPAPM25.toFixed(1));
+			    	ctx.font = '18pt font02';
+					ctx.fillText(str, (O_PM25.xx+len*25)/Xscale, O_PM25.yy/Yscale+40);						
+			    	ctx.font = '36pt font02';
+					ctx.fillStyle=OKColor;  
+		    	}
+				//Temp
+				ctx.fillStyle=OKColor;  
+				if(typeof(data["PT100"]) ==='undefined')
+				{
+					if(data.Temperature>O_Temperature.USL) ctx.fillStyle=NGColor;  
+					ctx.fillText(String(data.Temperature.toFixed(1)), O_Temperature.xx/Xscale, O_Temperature.yy/Yscale);
+				}
+				else
+				{
+					if(data.PT100>O_Temperature.USL) ctx.fillStyle=NGColor;  
+					ctx.fillText(String(data.PT100.toFixed(1)), O_Temperature.xx/Xscale, O_Temperature.yy/Yscale);
+				}
+				//RH
+				ctx.fillStyle=OKColor;  
+				if(data.RH>O_RH.USL) ctx.fillStyle=NGColor;  
+				ctx.fillText(String(data.RH.toFixed(1)), O_RH.xx/Xscale, O_RH.yy/Yscale);
+				//str.substr(1, 4); 1=start; 4=len ==> from 1 to 5
+				//str.substr(1)     from 1 to end
+				//str.substring(1, 4); 1=start; 4=end ==> from 1 to 3 (4 will set to '\0')
+				//str.substring(1); from 1 to end
+				
+		    	ctx.font = '18pt font02';
+				//Date
+				ctx.fillStyle=OKColor;  
+				var pos = data.date.indexOf(" ");
+				var DD = data.date.substring(0, pos);
+//						ctx.fillText(String(data.Date), O_Date.xx/Xscale, O_Date.yy/Yscale);
+				ctx.fillText(String(DD), O_Date.xx/Xscale, O_Date.yy/Yscale);
+				//Time
+				var TT = data.date.substring(pos+1);
+				var res = TT.split(":");
+				if(res[0].length==1) res[0]='0'+res[0];
+				if(res[1].length==1) res[1]='0'+res[1];
+				if(res[2].length==1) res[2]='0'+res[2];
+				TT=res[0]+':'+res[1]+':'+res[2];
+//						ctx.fillText(String(data.Time), O_Time.xx/Xscale, O_Time.yy/Yscale);
+				ctx.fillText(String(TT), O_Time.xx/Xscale, O_Time.yy/Yscale);
+				//Place
+		    	//ctx.font = '24pt font02';
+				//ctx.fillText(String(data.Place), O_Place.xx/Xscale, O_Place.yy/Yscale);
+				//Noise
+				if(typeof(data["Noise"]) ==='undefined')
+				{
+				}
+				else
+				{
+		    		ctx.font = '24pt font02';
+					ctx.fillText(String(data.Noise.toFixed(1)) +" dB", O_Place.xx/Xscale, (O_Place.yy-24)/Yscale);
+					if(typeof(data["MaxNoise"]) ==='undefined')
+					{}
+					else{
+						ctx.fillText(String(data.MaxNoise.toFixed(1)) +" dB", O_Place.xx/Xscale, (O_Place.yy+24)/Yscale);
+					}
+				}
+		    	//ctx.font = '12pt font02';
+				//SNO
+				{
+			    	ctx.font = '12pt font02';
+					ctx.fillText(String(data.BLESNO), O_SNO.xx/Xscale, O_SNO.yy/Yscale);
+				}
+				ctx.scale(1,1);
+		        //setTimeout(draw,timer1);		//Set Timer
+	            
+//	        }).error(function(jqXHR, textStatus, errorThrown){ /* assign handler */
+	        }).error(function(){ /* assign handler */
+	            //alert(jqXHR.responseText);
+	            //console.log(jqXHR.responseText);
+	            //alert("error occurred!");
+	            //console.log("Error:"+textStatus);		        	
+	        });
+	        
+            //if(timer1<10000)
+	        //	setTimeout(draw,10000);			//Set Timer 10sec.
+	        //else
+	        	setTimeout(draw,timer1);		//Set Timer
+		}
+		</script>
+	</head>
+	<body>
+		<!-- HTML -->
+		<div class="portrait" >
+			<img src="image/SUI_FORM0_8in1_Web.png" id="pannel" class="portrait"/>
+		</div>
+	</body>
+</html>
+
