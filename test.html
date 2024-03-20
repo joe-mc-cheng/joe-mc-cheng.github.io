@@ -1,411 +1,184 @@
-<!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Open Street Map Test</title>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
-    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
-    crossorigin=""/>
-    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
-    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
-    crossorigin="">
-    </script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.js"></script>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>g Sensor</title>
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" > -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cdbootstrap/css/bootstrap.min.css" />
+    </head>
+    <body>
+<div id="content">
+  
+    <!-- Begin Page Content -->    
+    <div class="container-fluid">
+    <div class="row">
+        <div class="col-xl-12 col-lg-12">
+            <div class="card shadow">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary" id='rtheadx'>X,Y,Z-axis Vibration</h6>
+                </div>
+                <div class="card-body">
+                        <canvas id="canvasx" ></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-    <style>
-        /* Always set the map height explicitly to define the size of the div
-        * element that contains the map. */
-        #map {
-            height: 100%;
-        }
-        /* Optional: Makes the sample page fill the window. */
-        html, body {
-            height: 100%;
-            margin: 0;
-            margin-top: 30px;
-            padding: 0;
-        }
-        #floating-panel {
-            position: absolute;
-            top: 10px;
-            left: 25px;
-            z-index: 5;
-            background-color: #fff;
-            padding: 5px;
-            border: 1px solid #999;
-            text-align: center;
-            font-family: 'Roboto','sans-serif';
-            line-height: 30px;
-            padding-left: 10px;
-        }
-        #floating-panel {
-            margin-left: 0px;
-        }
-    </style>
-  </head>
-<body>
-    <!--div id="floating-panel">
-        <button id="drop" onclick="drop()">Loading...</button>
-    </div-->
-    <div id="map"></div>
-    <script>
+<!-- Bootstrap core JavaScript-->
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" ></script> -->
+<script src="https://cdn.jsdelivr.net/npm/cdbootstrap/js/bootstrap.min.js"></script>
+<!-- Chartjs core JavaScript-->
+<!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
+<!-- jquery core JavaScript-->
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+        
+<script>
     function getUrlVars() {
-		var vars = {};
-		var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
-			vars[key] = value;
-		});
-		return vars;
-	}
-
-    //定位
-    /*var id, target, options,crd;
-
-    function success(pos) {
-        crd = pos.coords;
-        console.log(pos)
-        // 取得經緯度
-        console.log(pos.coords.latitude)
-        console.log(pos.coords.longitude)
-
-        if (target.latitude === crd.latitude && target.longitude === crd.longitude) {
-            console.log('Congratulations, you reached the target');
-            navigator.geolocation.clearWatch(id);
-        }
-    }
-
-    function error(err) {
-        //console.warn("Error(" + err.code + "):" + err.message);
-        console.log('ERROR(' + err.code + '): ' + err.message);
-    }
-
-    target = {
-        latitude : 0,
-        longitude: 0
-    };
-
-    options = {
-        enableHighAccuracy: true,
-        timeout: 5000,
-        maximumAge: 0
-    };
-
-    id = navigator.geolocation.watchPosition(success, error, options);*/
-
-/*
-    var position="";
-    function getLocation()
-        {
-            if (navigator.geolocation)
-            {
-                navigator.geolocation.getCurrentPosition(showPosition,showError);
-            }
-            else{
-                //x.innerHTML="Geolocation is not supported by this browser.";
-                position = "Geolocation is not supported by this browser.";
-            }
-        }
-
-        function showPosition(position)
-        {
-            //x.innerHTML="Latitude: " + position.coords.latitude + 
-            //"<br />Longitude: " + position.coords.longitude;	
-            position = "Latitude: " + position.coords.latitude + 
-            "<br />Longitude: " + position.coords.longitude;
-        }
-
-        function showError(error)
-        {
-            switch(error.code) 
-            {
-                case error.PERMISSION_DENIED:
-                //x.innerHTML="User denied the request for Geolocation."
-                position = "User denied the request for Geolocation."
-                break;
-                case error.POSITION_UNAVAILABLE:
-                //x.innerHTML="Location information is unavailable."
-                position = "Location information is unavailable."
-                break;
-                case error.TIMEOUT:
-                //x.innerHTML="The request to get user location timed out."
-                position = "The request to get user location timed out."
-                break;
-                case error.UNKNOWN_ERROR:
-                //x.innerHTML="An unknown error occurred."
-                position = "An unknown error occurred."
-                break;
-            }
-        }    
-
-        getLocation();
-        console.log(position);*/
-
-    //var map;
-    //var map = L.map('map').setView([51.505, -0.09], 13);
-    var map = L.map('map').setView([24.784893, 121.018358], 8);
-    //var map = L.map('map').setView([crd.latitude, crd.longitude], 16);
-    var markers = [];
-    var showcount=0;
-
-
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    }).addTo(map);
-
-    var epakey = getUrlVars()["key"];
-    console.log("key=" , epakey);
-    if(isNaN(epakey))
-    {
-        epakey='e4fd3567-e4f4-4682-81d8-4e3642b0372e';
-        console.log('Use default key');
-    }
-    var fields, records;  
-    var header=[];
-    var url3= "https://data.epa.gov.tw/api/v2/aqx_p_432?offset=0&limit=1000&api_key=" + epakey;
-    var greenIcon = new L.Icon({
-        iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
-        shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-        iconSize: [25, 41],
-        iconAnchor: [12, 41],
-        popupAnchor: [1, -34],
-        shadowSize: [41, 41]
+        var vars = {};
+        var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+            vars[key] = value;
         });
-    var redIcon = new L.Icon({
-    iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
-    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-    iconSize: [25, 41],
-    iconAnchor: [12, 41],
-    popupAnchor: [1, -34],
-    shadowSize: [41, 41]
-    });
-    var orangeIcon = new L.Icon({
-    iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-orange.png',
-    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-    iconSize: [25, 41],
-    iconAnchor: [12, 41],
-    popupAnchor: [1, -34],
-    shadowSize: [41, 41]
-    });
-        //marker-icon-2x-red.png
-        //marker-icon-2x-orange.png
-        /*
-        馬祖測試站
-        google map查詢地址
-        26.1625769,119.9269283
+        return vars;
+    }
+    var IP="172.24.20.25";
+    // var AXIS="X";
+    var G_IP = getUrlVars()["IP"];
+    if(typeof G_IP==='undefined')
+        G_IP="";
+    else
+        IP=G_IP;
 
-        Open Data : 位置在海裡?
-        26.25799556,120.59128111
-        */
-    $.getJSON(url3, function(data){
-        console.log(data);
+    console.log("IP=", IP);
+    var rtheadx = document.getElementById("rtheadx");
+    const datalen = 61;
+    var MaxPx = -1;
+    var MinPx = 999;
+    var MaxPy = -1;
+    var MinPy = 999;
+    var MaxPz = -1;
+    var MinPz = 999;
 
-        var fields = data.fields;
-        console.log(fields);
-        records = data.records;
-        console.log(records);
-        var latitude_min=90, latitude_max=-90;
-        var longitude_min=180, longitude_max=-180;
-        for(var i in records)
-        {
-            var air = records[i];
-            //longitude:121.760056 latitude:25.129167
-            var longitude = parseFloat(air["longitude"]);   //經度
-            var latitude = parseFloat(air["latitude"]);         //緯度    
-            var sitename = air["sitename"];
+    var timer1=1000;
+    console.log("host=",location.host);
+    // console.log(location.hostname);
+    // console.log(location.port);
 
-            if(sitename=="馬祖"){
-                longitude = 119.9269283;
-                latitude = 26.1625769;
+    const configx = {
+            type: 'line',
+            data: {
+                labels: Array(datalen).fill("00:00:00"),
+                datasets: [
+                    {
+                        label: "X-axis",
+                        backgroundColor: 'rgb(255, 99, 132)',
+                        borderColor: 'rgb(255, 99, 132)',
+                        data: Array(datalen).fill(null),
+                        fill: false,
+                    },
+                    {
+                        label: "Y-axis",
+                        backgroundColor: 'rgb(99, 255, 132)',
+                        borderColor: 'rgb(99, 255, 132)',
+                        data: Array(datalen).fill(null),
+                        fill: false,
+                    },
+                    {
+                        label: "Z-axis",
+                        backgroundColor: 'rgb(132, 99, 255)',
+                        borderColor: 'rgb(132, 99, 255)',
+                        data: Array(datalen).fill(null),
+                        fill: false,
+                    }
+                ],
+            },
+            options: {
+                responsive: true,
+                legend: {
+                    display: true
+                },
+                title: {
+                    display: true,
+                    text: 'g Sensor'
+                },
+                tooltips: {
+                    mode: 'index',
+                    intersect: false,
+                },
+                hover: {
+                    mode: 'nearest',
+                    intersect: true
+                },
+                scales: {
+                    xAxes: [{
+                        display: true,
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Time'
+                        }
+                    }],
+                    yAxes: [{
+                        display: true,
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'rms Velocity(mm/s)'
+                        }
+                    }]
+                }
             }
-
-            if(longitude > longitude_max) longitude_max = longitude;
-            if(longitude < longitude_min) longitude_min = longitude;
-            if(latitude > latitude_max) latitude_max = latitude;
-            if(latitude < latitude_min) latitude_min = latitude;
-
-            var pm25 = air["pm2.5"];
-            var icon = ( pm25 <25 ? greenIcon : orangeIcon);
-            if(icon==orangeIcon)
-                icon = ( pm25 < 35 ? orangeIcon : redIcon);
-            L.marker([latitude,longitude],{icon:icon}).addTo(map)
-                .bindPopup(sitename+':'+pm25)
-                .openPopup();
-        }
-        var latitude_cen = (latitude_max+latitude_min)/2;
-        var longitude_cen = (longitude_max+longitude_min)/2;
-        console.log('Center :',latitude_cen,longitude_cen);
-        //crd.latitude, crd.location
-        map.panTo({lon: longitude_cen, lat: latitude_cen},16);
+        };
+    const contextx = document.getElementById('canvasx').getContext('2d');
+    const lineChartx = new Chart(contextx, configx);
+    
+    $(document).ready(function () {
+        configx.options.title.text = "g Sensor";
+        draw();
     });
 
+    url3="http://" + IP + ":8080/read";
+    console.log("url=",url3);
+    // if(location.host != "")
+    //     url3="http://" + location.host +"/read";
 
-/*    L.marker([24.784893, 121.018358]).addTo(map)
-        .bindPopup('Sysinno')
-        .openPopup();
-
-    L.marker([24.783342, 121.017775]).addTo(map)
-        .bindPopup('光復關新路口')
-        .openPopup();
-
-
-    var poly = L.polygon([
-		[24.784893, 121.017775],
-		[24.784893, 121.018358],
-		[24.783342, 121.018358]
-	]).addTo(map);*/
-
-    /*L.circle(
-        [24.784893, 121.018358],    // 圓心座標
-        500,                        // 半徑（公尺）
+    function draw() {
+			
+        $.getJSON(url3, function(data){ 
+            console.log(data);
+        if (configx.data.labels.length === datalen) {
+            configx.data.labels.shift();
+            configx.data.datasets[0].data.shift();
+            configx.data.datasets[1].data.shift();
+            configx.data.datasets[2].data.shift();
+        }
+        // configx.data.labels.push(data.date_time.substring(-8));
+        // configx.data.labels.push(data.create_date_time.substring(-8));
+        configx.data.labels.push(data.date_time);
+        if(typeof(data.Vxrms) ==='undefined')
         {
-            color: 'red',           // 線條顏色
-            fillColor: '#f03',      // 填充顏色
-            fillOpacity: 0.5        // 透明度
+            configx.data.datasets[0].data.push(data.vrmsX);
+            configx.data.datasets[1].data.push(data.vrmsY);
+            configx.data.datasets[2].data.push(data.vrmsZ);
         }
-    ).addTo(map).bindPopup("500公尺");*/
-
-/*    var Today = new Date();
-    var dd = Today.getDate();
-    var mm = Today.getMonth()+1; //January is 0!
-    var yyyy = Today.getFullYear();
-    var syyyy,smm,sdd;
-    
-    if(dd<10){
-        sdd='0'+dd;
-    }
-    else sdd=String(dd);
-    if(mm<10){
-        smm='0'+mm;
-    }
-    else
-    	smm=String(mm);
-
-    var today = yyyy+'-'+smm+'-'+sdd;
-	var Bdat;
-	if(dd>7)
-	{
-    	Bdat = yyyy+'-'+smm+'-'+(dd-7);
-    }
-    else
-    {
-    	var day31 = [1,3,5,7,8,10,12];
-    	var day30 = [4,6,9,11];
-
-		var lm = mm-1;
-		if(lm==0)
-		{
-			lm=12;
-			yyyy = yyyy-1;
-		}
-		if(day31.indexOf(lm)!=-1)
-	    	Bdat = yyyy+'-'+(lm)+'-'+(dd+31-7);
-    	else if(day30.indexOf(lm)!=-1)
-	    	Bdat = yyyy+'-'+(lm)+'-'+(dd+31-7);
-		else
-	    	Bdat = yyyy+'-'+(lm)+'-'+(dd+28-7);
-    }
-    
-	var date1 = getUrlVars()["BDate"];
-	if(typeof date1==='undefined')
-	{
-		date1 = Bdat;
-	}
-		
-	var date2 = getUrlVars()["EDate"];
-	if(typeof date2==='undefined') 
-	{
-		date2 = today;
-	} 	
-    console.log(date1);
-    console.log(date2);
-    console.log(Bdat);
-    console.log(today);
-
-    var neighborhoods = [];
-    var sno=[];
-    var sno1=[];
-    var AllDevice=[];
-    var tdatarate=[];
-    var ldatarate=[];
-    var lzp=[];
-    var rateArray=[];
-    var powerArray=[];*/
-
-	/*$(document).ready(function () {
-		//var strapi = "http://sysinnotecnas.myqnapcloud.com/sysinno/i3EPA/iAeris3Info.php?callback=?";
-		var	strapi = "http://sysinnotecnas.myqnapcloud.com/sysinno/i3EPA/iAeris3Info.php?BDate="+date1+"&EDate="+date2+"&callback=?";
-		//console.log(strapi);
-		var cnt = 0;
-		var AllData;
-        document.getElementById('drop').innerText = "月平均";
-		
-	    /*$.getJSON(strapi, function (devicedata) {
-	    	//Data Parsing
-			$.each(devicedata, function(index, d){
-	            //console.log(d);
-	            AllDevice.push(d);
-	            cnt++;
-	            neighborhoods.push({lat: d.lat, lng:d.lng});
-	            sno.push(String(d.sno));
-	            sno1.push(String(d.sno1));
-	            rateArray.push(d.data);
-	            powerArray.push(d.power);
-	            tdatarate.push(String( (d.tdr*100).toFixed(1))+'%')
-	            ldatarate.push(String( (d.ldr*100).toFixed(1))+'%')
-//	            lzp.push(String( ((d.lzp/24)*100).toFixed(1))+'%');
-	            lzp.push(String(d.lzp));
-			});
-	        //console.log(AllDevice.length);
-			//console.log(AllDevice);
-			//console.log(rateArray);
-			//console.log(powerArray);
-			drop();
-		});		
-	});*/
-
-    function drop() {
-        //map.panTo({lon: crd.longitude, lat: crd.latitude});
-        /*        clearMarkers();
-			var datarate;
-			var ChartArray=[];
-			var url=0;
-			if(showcount%3==0)
-			{
-				url=0;
-				ChartArray=rateArray;
-				document.getElementById('drop').innerText = "月平均";
-			}			   
-			else if(showcount%3==1)
-			{
-				url=1;
-				ChartArray=rateArray;
-				document.getElementById('drop').innerText = "日平均";
-			}
-			else
-			{
-				url=2;
-				ChartArray=powerArray;
-				document.getElementById('drop').innerText = "ZeroPower";
-			}
-          for (var i = 0; i < neighborhoods.length; i++) {
-      		//Mark label 
-			if(showcount%3==0)
-				datarate=tdatarate[i];
-			else if(showcount%3==1)
-				datarate=ldatarate[i];
-			else
-				datarate=lzp[i];
-							
-			if(showcount%3==2)
-          		addMarkerWithoutTimeout(neighborhoods[i],datarate,url,String(sno1[i])+'-'+String(sno[i]),ChartArray[i]);
-			else
-          		addMarkerWithoutTimeout(neighborhoods[i],datarate,url,String(sno1[i])+'-'+String(sno[i])+": "+String(datarate),ChartArray[i]);
+        else{
+            configx.data.datasets[0].data.push(data.Vxrms);
+            configx.data.datasets[1].data.push(data.Vyrms);
+            configx.data.datasets[2].data.push(data.Vzrms);
         }
-        showcount++;
-        */
-      }
+        lineChartx.update();
 
+            
+    }).error(function(){ /* assign handler */
+            //console.log(jqXHR.responseText);
+            //console.log("Error:"+textStatus);		        	
+    });
+        
+    setTimeout(draw,timer1);		//Set Timer
+}
 
-    </script>
+</script>
+
+  <!-- End js code -->
 </body>
+
 </html>
